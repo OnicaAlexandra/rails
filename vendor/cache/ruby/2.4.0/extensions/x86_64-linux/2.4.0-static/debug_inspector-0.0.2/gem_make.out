@@ -1,0 +1,15 @@
+current directory: /home/alexandra/Documents/RoR/p/vendor/cache/ruby/2.4.0/gems/debug_inspector-0.0.2/ext/debug_inspector
+/home/alexandra/.rbenv/versions/2.4.0/bin/ruby -r ./siteconf20170503-3617-530724.rb extconf.rb
+creating Makefile
+
+current directory: /home/alexandra/Documents/RoR/p/vendor/cache/ruby/2.4.0/gems/debug_inspector-0.0.2/ext/debug_inspector
+make "DESTDIR=" clean
+
+current directory: /home/alexandra/Documents/RoR/p/vendor/cache/ruby/2.4.0/gems/debug_inspector-0.0.2/ext/debug_inspector
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.so
+
+current directory: /home/alexandra/Documents/RoR/p/vendor/cache/ruby/2.4.0/gems/debug_inspector-0.0.2/ext/debug_inspector
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.so ./.gem.20170503-3617-1gf2buc

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #map {
+      height: 400px;
+      width: 800px;
+    }
+  </style>
+</head>
+<body>
+<h3>Harta</h3>
+<div id="map"></div>
+<script>
+    function initMap() {
+        var uluru = {lat: 45.345508, lng: 24.262544};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRxy_SECA1fWzwY8a_AvCQNxnRcmldBug&callback=initMap">
+</script>
+
+<p>
+  <h2 style="color: #3A387A">Titlu:</h2>
+  <%= @post.title %>
+</p>
+ 
+<p>
+  <h2 style="color: #3A387A">Text:</h2>
+  <%= @post.text %>
+</p>
+
+<h3>Comments</h3>
+<% @post.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+  <p>
+  <%= link_to 'Destroy Comment', [comment.post, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>
+<% end %>
+
+<h3>Add a comment:</h3>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+  <p>
+    <%= f.label :commenter %><br>
+    <%= f.text_field :commenter %>
+  </p>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Edit', edit_post_path(@post) %> ||
+<%= link_to 'Back', posts_path %> ||
+<%= link_to 'Delete', post_path(@post),
+              method: :delete,
+              data: { confirm: 'Are you sure?' }  %>
+</body>
+</html>
