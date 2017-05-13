@@ -3,11 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  belongs_to :role 
+  belongs_to :role
+
+  has_many :events_participants, foreign_key: :participant_id
+  has_many :post, through: :events_participants
   before_create :set_default_role
   enum role: {user: 0, banned: 1, admin: 2}
   private
   def set_default_role
-  	self.role ||= Role.find_or_create_by_name('user')
+  	self.role ||= Role.find_by_name('user')
   end	
 end

@@ -3,18 +3,23 @@
 <h1>Meetings</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
+        <%= month_calendar do |date| %>
+            <%= date %>
+        <% end %>
+        <% if false %>
+        <%= week_calendar number_of_weeks: 2 do |date| %>
+            <%= date %>
+        <% end %>
+        <% end %>
+        <% if false %>
+        <%= calendar number_of_days: 4 do |date| %>
+            <%= date %>
+        <% end %>
+            <% end %>
         <td><%= meeting.name %></td>
         <td><%= meeting.start_time %></td>
         <td><%= meeting.end_time %></td>

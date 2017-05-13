@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503113102) do
+ActiveRecord::Schema.define(version: 20170510145545) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
@@ -21,12 +21,41 @@ ActiveRecord::Schema.define(version: 20170503113102) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
+  create_table "event_members", force: :cascade do |t|
+    t.string   "attendable_type"
+    t.integer  "attendable_id"
+    t.string   "invitable_type"
+    t.integer  "invitable_id"
+    t.string   "invitation_token"
+    t.string   "invitation_key"
+    t.string   "rsvp_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_participants", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "meetings", force: :cascade do |t|
     t.string   "name"
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "post_members", force: :cascade do |t|
+    t.string   "attendable_type"
+    t.integer  "attendable_id"
+    t.string   "invitable_type"
+    t.integer  "invitable_id"
+    t.string   "invitation_token"
+    t.string   "invitation_key"
+    t.string   "rsvp_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -36,6 +65,8 @@ ActiveRecord::Schema.define(version: 20170503113102) do
     t.datetime "updated_at", null: false
     t.string   "latitude"
     t.string   "longitude"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "roles", force: :cascade do |t|

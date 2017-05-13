@@ -55,3 +55,5 @@ gem 'gmaps4rails'
 gem 'countries'
 gem 'country_select'
 gem 'underscore-rails'
+
+gem 'attendable', github: 'rexblack/attendable'

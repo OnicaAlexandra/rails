@@ -26,13 +26,15 @@ class PostsController < ApplicationController
   #render plain: params[:posts].inspect 
     #@rol=User.role
     @post = Post.new(post_params)
+    # automatically add the creator of the event as an attending member
+   # @post.post_members.build({invitee: current_user, rsvp_status: :attending})
     if @post.save
        redirect_to @post
     else
       render 'new'
     end
   end
-  
+
   def update
     @post=Post.find(params[:id])
     if @post.update(post_params)
@@ -60,11 +62,12 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.rss { render :layout => false }
     end
-  end
+    end
+
 
   private
   def post_params
-    params.require(:post).permit(:title, :text)
+    params.require(:post).permit(:title, :text, :start_time, :end_time)
   end
   
   end
