@@ -17,3 +17,5 @@
 //= require gmaps/google
 //= require underscore
 //= require jquery.ui.datepicker
+//= require bootstrap-sprockets
+

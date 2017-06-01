@@ -9,10 +9,18 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :posts do
   	resources :comments
-    member do
-      get 'rsvp'
+   # member do
+    #  get 'rsvp'
     end
-  end
+    #resources :participation do
+     # collection do
+      #  get 'myparticipations'
+      #end
+    #end
+    get 'posts/join/:id', to: 'posts#join', as: 'join'
+    get "myparticipations", to: "posts#myparticipations"
+    get "posts/cancel/:id", to: "participation#destroy", as: "cancel"
+
 
   
 

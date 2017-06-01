@@ -4,7 +4,7 @@ class UsersController < ApplicationController
    end
 
    def participate
-     @userr = User.find(params[:id])
+     @user = User.find(params[:id])
    end
     
 end

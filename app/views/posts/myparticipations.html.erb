@@ -1,0 +1,16 @@
+<% @posts.each do |post| %>
+    <p> <div class="post">
+    <strong><%= post.title %></strong><br>
+    <%=post.text%> <br>
+    <p> Data inceput: </p>
+    <%= post.start_time %><br>
+    <p> Data sfarsit: </p>
+    <%=post.end_time %>
+  <% if user_signed_in? %>
+      <% if post.participating?(current_user) %>
+          <%= link_to "Anuleaza", cancel_path(post) %> |
+      <% end %>
+      <%= link_to "Descriere", post %>
+  <% end %>
+<% end %>
+<br><br><br></p>
