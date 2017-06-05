@@ -7,7 +7,10 @@ class ParticipationController < ApplicationController
   end
 
   def create
+
+
   end
+
 
   def edit
   end
@@ -17,14 +20,28 @@ class ParticipationController < ApplicationController
 
   def new
     @participation = Participation.new
+    #@participation.user = current_user
   end
   def destroy
-    @participation = Participation.destroy(params[:id])
-    @participation.destroy
-    respond_to do |format|
-      format.html { redirect_to myparticipations_path, notice: 'You are no longer attending this event.' }
-      format.json { head :no_content }
+    #@participation.user = current_user
+   # @participation = Participation.find(params[:id])
+    #@participation.destroy
+    #respond_to do |format|
+     #format.html { redirect_to posts_path, notice: 'You are no longer attending this event.' }
+      #format.json { head :no_content }
+      @participation = Participation.destroy(find_params[:id])
+      @participation.destroy
+      respond_to do |format|
+        format.html { redirect_to @event, notice: 'You are no longer attending this event.' }
+        format.json { head :no_content }
+      end
     end
-  end
+     #@participation.find(params[:id]).destroy
+     #respond_to do |format|
+      # format.html { redirect_to posts_path, notice: 'You are no longer attending this event.' }
+     #  format.json { head :no_content }
+    #end
+  #end
+
 
 end

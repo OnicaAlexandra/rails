@@ -8,27 +8,34 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card-2">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <br>
+      <% if user_signed_in? %>
+          <%= link_to 'Evenimentele mele', myparticipations_path, style: "margin: 10px; color:white "%>
+      <% end %>
+
+      <%= link_to 'Creaza eveniment nou', new_post_path , style: "margin: 10px; color:white "%>
+      <%= link_to 'Evenimente', posts_path , style: "margin: 10px; color:white "%>
+      <% if user_signed_in? %>
+          <h6 style=" float: right; margin: 10px">
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </h6>
+      <% else %>
+          <h6  style=" float: right; ">
+            <%= link_to('Login', new_user_session_path)  %> </h6>
+      <% end %>
+      <br><br>
+    </div>
+  </div>
  <!-- <body style="background: url('<%= asset_path 'a.jpg' %>'); background-repeat: no-repeat;
       background-attachment: fixed;
       background-position: center;">
 -->
     <body style="background-color: darkslategrey">
     <%= yield %>
-     
-     <% if user_signed_in? %>
-        <li>
-       <br>
-       <br>
-       <h4 style=" float: right; margin: 30px">
-       <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </h4>       
-       </li>
-    <% else %>
-       <li>
-       <br>
-       <br><h4  style=" float: right; ">
-       <%= link_to('Login', new_user_session_path)  %> </h4> 
-       </li>
-    <% end %>
+
 
 
     <p class="notice"><%= notice %></p>

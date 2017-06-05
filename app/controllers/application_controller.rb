@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
    # user_signed_in? && current_user.role.created_at == "role"
  # end
   #helper_method :is_user?
+ # before_filter :set_current_user
+
+  #def set_current_user
+   # Participation.user = current_user
+  #end
 end
 
 

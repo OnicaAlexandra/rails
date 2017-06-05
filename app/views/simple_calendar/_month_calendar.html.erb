@@ -1,5 +1,107 @@
-<div class="simple-calendar">
-  <h2> Calendarul evenimentului </h2>
+<style>
+#simple_calendar{
+  width: 50px;
+  height: 50px;
+}
+
+  table {
+
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgb(221, 221, 221);
+    border-collapse: collapse;
+    box-sizing: border-box;
+
+  }
+
+  .tr {
+    border-collapse: collapse;
+  }
+
+  .th {
+    padding: 4px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-collapse: collapse;
+    border-left: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+    border-top: 1px none rgb(51, 51, 51);
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .td {
+    padding: 4px;
+    vertical-align: top;
+    width: 14%;
+
+    border: 3px solid #ddd;
+    border-top-color: rgb(221, 111, 93);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(221, 221, 221);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(221, 221, 221);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(221, 221, 221);
+    border-left-style: solid;
+    border-left-width: 1px;
+  }
+
+  .day {
+    height: 14%;
+  }
+
+  .wday-0 {
+  }
+
+  .wday-1 {
+  }
+
+  .wday-2 {
+  }
+
+  .wday-3 {
+  }
+
+  .wday-4 {
+  }
+
+  .wday-5 {
+  }
+
+  .wday-6 {
+  }
+
+  .today {
+    background: #6C6
+  }
+
+  .past {
+  }
+
+  .future {
+  }
+
+  .prev-month {
+    background: #DDD;
+  }
+
+  .next-month {
+    background: #DDD;
+  }
+
+  .current-month {
+  }
+
+  .has-events {
+  }
+
+</style>
+
+
+
+<div id="simple_calendar">
   <table class="table table-striped">
     <thead>
     <tr>
@@ -14,6 +116,7 @@
         <tr>
           <% week.each do |day| %>
               <%= content_tag :td, class: calendar.td_classes_for(day) do %>
+
                   <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(block) %>
                       <% capture_haml(day, sorted_events.fetch(day, []), &block) %>
                   <% else %>
@@ -25,10 +128,10 @@
     <% end %>
     </tbody>
   </table>
-  <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
-  </div>
+  <p style="display: inline">
+    <%= link_to t('_month_calendar.previous', default: 'Inapoi'), calendar.url_for_previous_view %>
+  <%= t('date.month_names')[start_date.month] %>
+    <%= link_to t('_month_calendar.next', default: 'Inainte'), calendar.url_for_next_view %>
+  </p>
 
 </div>

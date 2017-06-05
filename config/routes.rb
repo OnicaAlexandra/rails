@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   resources :meetings
   #devise_for :users
-  #get 'posts/index'
   get 'posts/index'
   get 'feed'=> 'posts#feed'
   root 'posts#index'
   devise_for :users
-  resources :users, only: [:show]
+  resources :users, only: [:show, :destroy ] do
+    resources :participation, only: [:create, :show, :destroy]
+    get 'post/show'
+  end
+  #end
   resources :posts do
   	resources :comments
    # member do
@@ -17,9 +20,13 @@ Rails.application.routes.draw do
       #  get 'myparticipations'
       #end
     #end
-    get 'posts/join/:id', to: 'posts#join', as: 'join'
+    resources :posts
+
+  get "posts/cancel/:id", to: "participation#destroy", as: "cancel"
+    get 'post/join/:id', to: 'post#join', as: 'join'
     get "myparticipations", to: "posts#myparticipations"
-    get "posts/cancel/:id", to: "participation#destroy", as: "cancel"
+    get "posts/participation/cancel/:id", to: "participation#destroy", as: "destroy"
+  get "participation", to: "post#participation"
 
 
   

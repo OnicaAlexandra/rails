@@ -2,6 +2,8 @@ class PostsController < ApplicationController
 
    before_action :authenticate_user!, only: ['edit', 'create', 'delete']
    #before_action :verify_role, only: ['create']
+
+
   def index
   	@posts = Post.all 
   end
@@ -93,7 +95,7 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :text, :start_time, :end_time)
   end
-  
+
   end
 
 

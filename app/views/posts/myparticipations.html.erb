@@ -1,16 +1,43 @@
-<% @posts.each do |post| %>
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<style>
+  body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+  }
+
+</style>
+
+<div class="w3-black" id="tour">
+  <div class="w3-container w3-content w3-padding-64" style="width:1000px">
+    <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
+      <h2 class="w3-wide w3-center">Evenimentele mele</h2><br><br>
+  <% @posts.each do |post| %>
+
     <p> <div class="post">
-    <strong><%= post.title %></strong><br>
-    <%=post.text%> <br>
-    <p> Data inceput: </p>
-    <%= post.start_time %><br>
-    <p> Data sfarsit: </p>
-    <%=post.end_time %>
-  <% if user_signed_in? %>
+      <div class="w3-container w3-white" style="height: 100%; margin-bottom: 25px"><br>
+      <strong><h5><%= post.title %></h5></strong><br>
+      <%= post.text.lines.first %> <br><br>
+     Data inceput:
+          <%= post.start_time.to_time.strftime('%e %B %Y, %l:%M %p') %>
+          <br><br>
+     Data sfarsit:
+          <%= post.end_time.to_time.strftime('%e %B %Y, %l:%M %p') %><br> <br>
+
+          <% if user_signed_in? %>
       <% if post.participating?(current_user) %>
           <%= link_to "Anuleaza", cancel_path(post) %> |
       <% end %>
-      <%= link_to "Descriere", post %>
+      <%= link_to "Descriere", post %><br><br>
   <% end %>
+          </div>
 <% end %>
+
 <br><br><br></p>
+    </div>
+  </div>
+</div>
