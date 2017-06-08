@@ -1,18 +1,22 @@
 class PostsController < ApplicationController
 
-   before_action :authenticate_user!, only: ['edit', 'create', 'delete']
+  before_filter ->{ authenticate_user!( force: true ) }
+
+  before_action :authenticate_user!, only: ['edit', 'create', 'delete']
    #before_action :verify_role, only: ['create']
 
-
   def index
-  	@posts = Post.all 
+  	@posts = Post.all
+   # @user= User.find(params[:id])
   end
 
   def new
   	@post=Post.new
+
   end
   def edit
   	@post=Post.find(params[:id])
+
   end
   def show
   	@post = Post.find(params[:id])
@@ -22,12 +26,15 @@ class PostsController < ApplicationController
       marker.lng post.longitude
     end
     @participating = @post.participating?(current_user)
+
   end	
   
   def create
   #render plain: params[:posts].inspect
     #@rol=User.role
     @post = Post.new(post_params)
+    @user = current_user.posts.new(params[:post])
+
     # automatically add the creator of the event as an attending member
    # @post.post_members.build({invitee: current_user, rsvp_status: :attending})
     if @post.save

@@ -64,3 +64,5 @@ gem 'sprockets-rails'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
+gem "cancan"
+gem 'devise_token_auth', github:"lynndylanhurley/devise_token_auth", branch: "master"

@@ -16,28 +16,28 @@
   <div class="w3-container w3-content w3-padding-64" style="width:1000px">
     <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
       <h2 class="w3-wide w3-center">Evenimentele mele</h2><br><br>
-  <% @posts.each do |post| %>
+      <% @posts.each do |post| %>
 
-    <p> <div class="post">
+          <p> <div class="post">
       <div class="w3-container w3-white" style="height: 100%; margin-bottom: 25px"><br>
-      <strong><h5><%= post.title %></h5></strong><br>
-      <%= post.text.lines.first %> <br><br>
-     Data inceput:
-          <%= post.start_time.to_time.strftime('%e %B %Y, %l:%M %p') %>
-          <br><br>
-     Data sfarsit:
-          <%= post.end_time.to_time.strftime('%e %B %Y, %l:%M %p') %><br> <br>
+        <strong><h5><%= post.title %></h5></strong><br>
+        <%= post.text.lines.first %> <br><br>
+        Data inceput:
+        <%= post.start_time.to_time.strftime('%e %B %Y, %l:%M %p') %>
+        <br><br>
+        Data sfarsit:
+        <%= post.end_time.to_time.strftime('%e %B %Y, %l:%M %p') %><br> <br>
 
-          <% if user_signed_in? %>
-      <% if post.participating?(current_user) %>
-          <%= link_to "Anuleaza", cancel_path(post) %> |
+        <% if user_signed_in? %>
+            <% if post.participating?(current_user) %>
+                <%= link_to "Anuleaza", cancel_path(post) %> |
+            <% end %>
+            <%= link_to "Descriere", post %><br><br>
+        <% end %>
+      </div>
       <% end %>
-      <%= link_to "Descriere", post %><br><br>
-  <% end %>
-          </div>
-<% end %>
 
-<br><br><br></p>
+      <br><br><br></p>
     </div>
   </div>
 </div>
