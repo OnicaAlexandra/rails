@@ -8,5 +8,4 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( index.js )
-Rails.application.config.assets.precompile += ['_month_calendar.css']
+# Rails.application.config.assets.precompile += %w( search.js )

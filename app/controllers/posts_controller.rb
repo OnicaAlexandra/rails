@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_filter ->{ authenticate_user!( force: true ) }
+  #before_filter ->{ authenticate_user!( force: true ) }
 
   before_action :authenticate_user!, only: ['edit', 'create', 'delete']
    #before_action :verify_role, only: ['create']
@@ -8,6 +8,7 @@ class PostsController < ApplicationController
   def index
   	@posts = Post.all
    # @user= User.find(params[:id])
+    @users= User.all
   end
 
   def new
@@ -27,21 +28,21 @@ class PostsController < ApplicationController
     end
     @participating = @post.participating?(current_user)
 
-  end	
+  end
+  def show_users
+    @users = User.all()
+    @posts = Post.all()
+  end
+
   
   def create
-  #render plain: params[:posts].inspect
-    #@rol=User.role
     @post = Post.new(post_params)
-    @user = current_user.posts.new(params[:post])
-
-    # automatically add the creator of the event as an attending member
-   # @post.post_members.build({invitee: current_user, rsvp_status: :attending})
     if @post.save
        redirect_to @post
     else
       render 'new'
     end
+    #@post.current_user = current_user
   end
 
   def update
@@ -74,23 +75,18 @@ class PostsController < ApplicationController
     end
 
    def myparticipations
-     @posts = current_user.posts
+     @posts = Post.all
    end
 
    def join
-
      unless user_signed_in?
        render plain: post.errors.messages
        return
      end
-
      @post = Post.find(params[:id])
-
      participation = Participation.new(post: @post, user: current_user)
-
      if participation.save
-       redirect_to @post, notice: "Thanks for joining this event! See you there!"
-
+       redirect_to @post, notice: "Multumim pentru inscrierea la eveniment!"
      else
        render file: "public/404", status: 404, formats: [:html]
      end

@@ -11,7 +11,10 @@ class ApplicationController < ActionController::Base
  # end
   #helper_method :current_user, :admin?
 
-
+  #def current_user
+   # @_current_user ||= session[:current_user_id] &&
+    #    User.find_by(id: session[:current_user_id])
+ # end
 
   protected
 
@@ -29,6 +32,7 @@ class ApplicationController < ActionController::Base
   #def set_current_user
   # Participation.user = current_user
   #end
+
   end
 
 

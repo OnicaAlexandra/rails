@@ -13,11 +13,17 @@
   <div class="w3-bar w3-black w3-card-2">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <br>
+
     <% if user_signed_in? %>
         <%= link_to 'Evenimentele mele', myparticipations_path, style: "margin: 10px; color:white "%>
+        <% if current_user.id== 3 %>
+
+            <%= link_to "Utilizatori inscrisi", show_users_path %>
+            <%= link_to 'Creaza eveniment nou', new_post_path , style: "margin: 10px; color:white "%>
+
+        <%end%>
     <% end %>
 
-    <%= link_to 'Creaza eveniment nou', new_post_path , style: "margin: 10px; color:white "%>
     <%= link_to 'Evenimente', posts_path , style: "margin: 10px; color:white "%>
     <% if user_signed_in? %>
         <h6 style=" float: right; margin: 10px">
@@ -33,7 +39,7 @@
       background-attachment: fixed;
       background-position: center;">
 -->
-<body style="background-color: darkslategrey">
+<body style="background-color: whitesmoke">
 <%= yield %>
 
 

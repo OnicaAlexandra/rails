@@ -71,23 +71,24 @@
     <div class="w3-content" style="max-width:700px">
       <h3 class="w3-center w3-padding-64"><span class="w3-tag w3-wide"><%= @post.title %></span></h3>
       <h7><%= @post.text %> </h7><br><br>
+
+      <h7>Puteti gasi evenimentul si pe pagina noastra de facebook <%= link_to 'Nedeea Valceana', "https://www.facebook.com/nedeeavalceana/" %><br><br>
       <div id="map"></div>
 
       <script async defer style="max-width:700px"
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRxy_SECA1fWzwY8a_AvCQNxnRcmldBug&callback=initMap">
       </script>
+      <h7>Puteti gasi evenimentul si pe pagina noastra de facebook <%= link_to 'Nedeea Valceana', "https://www.facebook.com/nedeeavalceana/" %>
       <br><br>
 
       <% if user_signed_in? and not @participating %>
-          <%= link_to "Join", join_path %>
+          <%= link_to "Join", join_path() %>
       <% elsif @participating %>
           <h7> Esti deja interesat de acest eveniment. Vezi <%= link_to "Evenimentele mele", myparticipations_path %> </h7>
-          <%= link_to 'Anuleaza', cancel_path(post),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' }  %>
+
 
       <%else %>
-          <h7>Trebuie sa te inregistrezi pentru a putea participa:
+          <h7>Trebuie sa te inregistrezi pentru a putea participa
             <%= link_to('Login', new_user_session_path)  %></h7>
     <% end %>
 
@@ -109,8 +110,8 @@
                         data: { confirm: 'Are you sure?' } %>
           </p>
       <% end %>
-
       <h7>Adauga comentariu</h7>
+        <% if user_signed_in? %>
       <%= form_for([@post, @post.comments.build]) do |f| %>
           <p>
             <%= f.label :Nume %><br>
@@ -118,25 +119,25 @@
           </p>
           <p>
             <%= f.label :text %><br>
+
             <%= f.text_area :body %>
           </p>
           <p>
             <%= f.submit %>
           </p>
       <% end %>
+    <% else%>
+            Trebuie sa te inregistrezi pentru a putea comenta.
 
-
+        <% if current_user.id== 3 %>
       <%= link_to 'Edit', edit_post_path(@post) %> ||
-      <%= link_to 'Back', posts_path %> ||
       <%= link_to 'Delete', post_path(@post),
                   method: :delete,
                   data: { confirm: 'Esti sigur?' }  %>
+      <%end%>
+        <%end%>
     </div>
   </div>
-
-
-
-
 
 <script>
     function initMap() {
@@ -151,4 +152,6 @@
         });
     }
 </script>
+
+
     </body>
